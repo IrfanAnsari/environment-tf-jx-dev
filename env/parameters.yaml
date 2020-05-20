@@ -1,0 +1,10 @@
+adminUser:
+  password: vault:tf-jx-loving-yak/adminUser:password
+  username: admin
+enableDocker: false
+pipelineUser:
+  email: irfanaansari@gmail.com
+  token: vault:tf-jx-loving-yak/pipelineUser:token
+  username: IrfanAnsari
+prow:
+  hmacToken: vault:tf-jx-loving-yak/prow:hmacToken

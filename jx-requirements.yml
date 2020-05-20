@@ -1,35 +1,90 @@
+autoUpdate:
+  enabled: false
+  schedule: ""
+bootConfigURL: https://github.com/jenkins-x/jenkins-x-boot-config.git
 cluster:
-  clusterName: ""
-  environmentGitOwner: ""
-  environmentGitPublic: false
-  project: ""
+  clusterName: tf-jx-loving-yak
+  devEnvApprovers:
+  - IrfanAnsari
+  environmentGitOwner: help
+  gitKind: github
+  gitName: github
+  gitServer: https://github.com
+  namespace: jx
+  project: still-protocol-277612
   provider: gke
-  zone: ""
-gitops: true
+  registry: gcr.io
+  vaultName: tf-jx-loving-yak
+  vaultSAName: tf-jx-loving-yak-vt
+  zone: us-central1-a
 environments:
-- key: dev
-- key: staging
-- key: production
+- ingress:
+    domain: 34.68.227.253.nip.io
+    externalDNS: false
+    namespaceSubDomain: -jx.
+    tls:
+      email: ""
+      enabled: false
+      production: true
+  key: dev
+  repository: environment-tf-jx-loving-yak-dev
+- ingress:
+    domain: ""
+    externalDNS: false
+    namespaceSubDomain: ""
+    tls:
+      email: ""
+      enabled: false
+      production: false
+  key: staging
+  repository: environment-tf-jx-loving-yak-staging
+- ingress:
+    domain: ""
+    externalDNS: false
+    namespaceSubDomain: ""
+    tls:
+      email: ""
+      enabled: false
+      production: false
+  key: production
+  repository: environment-tf-jx-loving-yak-production
+gitops: true
 ingress:
-  domain: ""
+  domain: 34.68.227.253.nip.io
   externalDNS: false
+  namespaceSubDomain: -jx.
   tls:
     email: ""
     enabled: false
-    production: false
+    production: true
 kaniko: true
-secretStorage: local
+repository: nexus
+secretStorage: vault
 storage:
+  backup:
+    enabled: true
+    url: gs://backup-tf-jx-loving-yak-935e482ebbef
   logs:
-    enabled: false
-    url: ""
+    enabled: true
+    url: gs://logs-tf-jx-loving-yak-935e482ebbef
   reports:
-    enabled: false
-    url: ""
+    enabled: true
+    url: gs://reports-tf-jx-loving-yak-935e482ebbef
   repository:
-    enabled: false
-    url: ""
+    enabled: true
+    url: gs://repository-tf-jx-loving-yak-935e482ebbef
+vault:
+  bucket: vault-tf-jx-loving-yak-935e482ebbef
+  key: crypto-key-tf-jx-loving-yak-935e482ebbef
+  keyring: keyring-tf-jx-loving-yak-935e482ebbef
+  name: tf-jx-loving-yak
+  serviceAccount: tf-jx-loving-yak-vt
+velero:
+  namespace: velero
+  schedule: 0 * * * *
+  serviceAccount: tf-jx-loving-yak-vo
+  ttl: 720h0m0s
 versionStream:
-  ref: "master"
+  ref: v1.0.467
   url: https://github.com/jenkins-x/jenkins-x-versions.git
 webhook: lighthouse
